@@ -10,14 +10,14 @@ class LoginPage extends Component {
       <Fragment>
         <nav style={styles.headerContainer}>
           <div className="navbar-fixed">
-            <h4 style={styles.heading}>FB Albums</h4>
+            <h4 style={styles.heading}>Facebook Albums</h4>
           </div>
         </nav>
         <div className="row">
           <div className="col s12 m4 l3">
             <FBLogin />
           </div>
-          <div className="col s12 m8 l9" style={{ marginTop: '8%' }}>
+          <div className="col s12 m8 l9" style={{ marginTop: '5%' }}>
             {
               loggingIn &&
               (
