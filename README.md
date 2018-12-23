@@ -1,4 +1,18 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Demo the Project
+To run the demo:
+
+Add your facebook app id in the [src/config/index.js](src/config/index.js) file on the line 3:
+
+```
+    appId            : '<add your facebook app id here>',
+```
+
+```
+yarn install
+yarn start
+```
+
 
 ## Available Scripts
 
