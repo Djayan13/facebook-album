@@ -6,7 +6,8 @@ export const userActions = {
     login,
     logout,
     getAlbums,
-    getPhotos
+    getPhotos,
+    getMorePhotos
 };
 
 function login(response) {
@@ -64,4 +65,20 @@ function getPhotos(albumid, accessToken) {
     function request() { return { type: userConstants.GETALL_PHOTOS_REQUEST } }
     function success(photos) { return { type: userConstants.GETALL_PHOTOS_SUCCESS, photos } }
     function failure(error) { return { type: userConstants.GETALL_PHOTOS_FAILURE, error } }
+  }
+
+  function getMorePhotos(nextPage, accessToken) {
+    return dispatch => {
+        dispatch(request());
+  
+        userService.loadMorePhotoData(nextPage, accessToken)
+            .then(
+                photos => dispatch(success(photos)),
+                error => dispatch(failure(error))
+            );
+    };
+  
+    function request() { return { type: userConstants.LOADMORE_PHOTOS_REQUEST } }
+    function success(photos) { return { type: userConstants.LOADMORE_PHOTOS_SUCCESS, photos } }
+    function failure(error) { return { type: userConstants.LOADMORE_PHOTOS_FAILURE, error } }
   }

@@ -5,7 +5,8 @@ export const userService = {
   login,
   logout,
   getAlbumData,
-  getPhotoData
+  getPhotoData,
+  loadMorePhotoData
 };
 
 function login(response) {
@@ -23,8 +24,8 @@ function logout() {
 }
 
 function getAlbumData(userID, accessToken) {
-  //fetches 10 albums 
-  const albumUrl = `${config.baseApi}/${userID}?fields=albums.limit(10){name,count,cover_photo{picture}}`;
+  //fetches albums based on config setting
+  const albumUrl = `${config.baseApi}/${userID}?fields=albums.limit(${config.photoCount}){name,count,cover_photo{picture}}`;
 
   return axios.get(
     albumUrl,
@@ -42,11 +43,27 @@ function getAlbumData(userID, accessToken) {
 }
 
 function getPhotoData(albumid, accessToken) {
-  //fetches 20 photos from specific album
-  const albumUrl = `${config.baseApi}/${albumid}?fields=photos.limit(20){picture,images}`;
+  //fetches photos from specific album based on config setting
+  const albumUrl = `${config.baseApi}/${albumid}?fields=photos.limit(${config.photoCount}){picture,images}`;
 
   return axios.get(
     albumUrl,
+    {
+      headers: {
+        "Authorization": `Bearer ${accessToken}`
+      }
+    }
+  )
+    .then(response => {
+      return response.data
+    }).catch(function (error) {
+      console.log(error);
+    });
+}
+
+function loadMorePhotoData(nextPage, accessToken) {
+  return axios.get(
+    nextPage,
     {
       headers: {
         "Authorization": `Bearer ${accessToken}`

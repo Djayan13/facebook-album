@@ -13,6 +13,18 @@ export function photos(state = {}, action) {
       return { 
         error: action.error
       };
+      case userConstants.LOADMORE_PHOTOS_REQUEST:
+      return {
+        loading: true
+      };
+    case userConstants.LOADMORE_PHOTOS_SUCCESS:
+      return {
+        photos:action.photos
+      };
+    case userConstants.LOADMORE_PHOTOS_FAILURE:
+      return { 
+        error: action.error
+      };
     default:
       return state
   }

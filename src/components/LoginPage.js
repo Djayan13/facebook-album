@@ -20,7 +20,9 @@ class LoginPage extends Component {
           <div className="col s12 m8 l9" style={{ marginTop: '8%' }}>
             {
               loggingIn &&
-                (<Albums userID={user.response.userID} accessToken={user.response.accessToken} />) 
+              (
+                <Albums userID={user.response.userID} accessToken={user.response.accessToken} />
+              )
             }
           </div>
         </div>
