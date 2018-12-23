@@ -1,4 +1,5 @@
 import axios from 'axios';
+import config from '../config'
 
 export const userService = {
   login,
@@ -22,7 +23,8 @@ function logout() {
 }
 
 function getAlbumData(userID, accessToken) {
-  const albumUrl = `https://graph.facebook.com/v3.2/${userID}?fields=albums.limit(10){name,count,cover_photo{picture}}`;
+  //fetches 10 albums 
+  const albumUrl = `${config.baseApi}/${userID}?fields=albums.limit(10){name,count,cover_photo{picture}}`;
 
   return axios.get(
     albumUrl,
@@ -40,7 +42,8 @@ function getAlbumData(userID, accessToken) {
 }
 
 function getPhotoData(albumid, accessToken) {
-  const albumUrl = `https://graph.facebook.com/v3.2/${albumid}?fields=photos.limit(20){picture,images}`;
+  //fetches 20 photos from specific album
+  const albumUrl = `${config.baseApi}/${albumid}?fields=photos.limit(20){picture,images}`;
 
   return axios.get(
     albumUrl,
